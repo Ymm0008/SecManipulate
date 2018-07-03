@@ -2152,27 +2152,6 @@ if(screen.width<1920){
             sortOrder:"desc",
             columns: [
                 {
-                    title: "公告类型",//标题
-                    field: "type",//键名
-                    sortable: true,//是否可排序
-                    order: "desc",//默认排序方式
-                    align: "center",//水平
-                    valign: "middle",//垂直
-                    formatter: function (value, row, index) {
-                        // if (row.type==''||row.type=='null'||row.type=='unknown'||!row.type){
-                        //     return '未知';
-                        // }else {
-                        //     return row.type;
-                        // };
-                        // 暂改为这种
-                        if (row['公告类型']==''||row['公告类型']=='null'||row['公告类型']=='unknown'||!row['公告类型']){
-                            return '未知';
-                        }else {
-                            return row['公告类型'];
-                        };
-                    }
-                },
-                {
                     title: "公告时间",//标题
                     field: "publish_time",//键名
                     sortable: true,//是否可排序
@@ -2190,6 +2169,27 @@ if(screen.width<1920){
                             return '未知';
                         }else {
                             return row['公告时间'];
+                        };
+                    }
+                },
+                {
+                    title: "公告类型",//标题
+                    field: "type",//键名
+                    sortable: true,//是否可排序
+                    order: "desc",//默认排序方式
+                    align: "center",//水平
+                    valign: "middle",//垂直
+                    formatter: function (value, row, index) {
+                        // if (row.type==''||row.type=='null'||row.type=='unknown'||!row.type){
+                        //     return '未知';
+                        // }else {
+                        //     return row.type;
+                        // };
+                        // 暂改为这种
+                        if (row['公告类型']==''||row['公告类型']=='null'||row['公告类型']=='unknown'||!row['公告类型']){
+                            return '未知';
+                        }else {
+                            return row['公告类型'];
                         };
                     }
                 },
@@ -3665,26 +3665,42 @@ if(screen.width<1920){
         $('#profit-content center.loading').hide();
     }
     profit_table(profit_tableData)
+//市场舆情
+
+
+
 
 // 历史信用
+$('#myTabs3 li a').on('click',function () {
+    var _tp=$(this).attr('id');
+    if(_tp=='all1'){
+        $('.listAll1').show();
+    }else {
+        $('.listAll1').hide();
+    }
+});
+$('.anaDown .listAll1 button').on('click',function () {
+    $(this).addClass('btn-success').removeClass('btn-primary');
+    $(this).siblings().removeClass('btn-success').addClass('btn-primary');
+})
     var credit_url = '/maniPulate/manipulateReport/credit/?id='+id;
     // public_ajax.call_request('get',credit_url,creditHistory);
     // 假数据
         var creditHistoryData = [
             {
-            date: "2015-12-18",
+            date: "2015-12-18",a:'a',
             abstract: "未及时披露公司重大事项,未依法履行其他职责",
-            type: "违规行为公告"
+            type: "中交所"
             },
             {
-            date: "2015-02-13",
+            date: "2015-02-13",a:'b',
             abstract: "未依法履行其他职责",
-            type: "违规行为公告"
+            type: "交易所"
             },
             {
-            date: "2010-12-31",
+            date: "2010-12-31",a:'c',
             abstract: "未依法履行其他职责",
-            type: "违规行为公告"
+            type: "中交所"
             }
         ];
     function creditHistory(data) {
@@ -3709,7 +3725,26 @@ if(screen.width<1920){
             sortOrder:"desc",
             columns: [
                 {
-                    title: "时间",//标题
+                    title: "序号",//标题
+                    field: "",//键名
+                    sortable: true,//是否可排序
+                    order: "desc",//默认排序方式
+                    align: "center",//水平
+                    valign: "middle",//垂直
+                    formatter: function (value, row, index) {
+                        return index+1;
+                    }
+                },
+                {
+                    title: "机构/个人",//标题
+                    field: "a",//键名
+                    sortable: true,//是否可排序
+                    order: "desc",//默认排序方式
+                    align: "center",//水平
+                    valign: "middle",//垂直
+                },
+                {
+                    title: "处罚时间",//标题
                     field: "date",//键名
                     sortable: true,//是否可排序
                     order: "desc",//默认排序方式
@@ -3724,7 +3759,7 @@ if(screen.width<1920){
                     }
                 },
                 {
-                    title: "类型",//标题
+                    title: "执行机构",//标题
                     field: "type",//键名
                     sortable: true,//是否可排序
                     order: "desc",//默认排序方式
@@ -3739,7 +3774,7 @@ if(screen.width<1920){
                     }
                 },
                 {
-                    title: "摘要",//标题
+                    title: "案件详情",//标题
                     field: "abstract",//键名
                     sortable: true,//是否可排序
                     order: "desc",//默认排序方式
